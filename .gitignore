@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Upload & session temp directories (local server only)
+server/uploads/
+server/sessions/
+
+# Zip files
+*.zip
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local

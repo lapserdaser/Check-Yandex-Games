@@ -1,0 +1,24 @@
+{
+  "name": "check-yg",
+  "version": "1.0.0",
+  "description": "Local Web Application for Yandex Games Pre-Submission & Compliance Verification",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "yandex-games",
+    "checker",
+    "compliance",
+    "gamedev"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

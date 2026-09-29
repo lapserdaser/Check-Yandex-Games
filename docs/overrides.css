@@ -1,0 +1,32 @@
+.privacy-banner {
+  margin-top: 16px;
+  padding: 10px 16px;
+  background: rgba(88, 166, 255, 0.08);
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  border-radius: 8px;
+  color: #8b949e;
+  font-size: 13px;
+  text-align: center;
+}
+
+.btn-github {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background: #21262d;
+  color: #c9d1d9;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-github:hover {
+  background: #30363d;
+  border-color: #8b949e;
+  color: #fff;
+}

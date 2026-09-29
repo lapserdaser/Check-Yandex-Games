@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CheckYG — Инспектор готовности игр к Яндекс Играм</title>
+  <meta name="description" content="Бесплатный онлайн-инструмент для проверки готовности HTML5-игры к публикации в Яндекс Играх. Анализирует SDK, рекламу, локализацию, UX и структуру архива.">
+  <meta property="og:title" content="CheckYG — Yandex Games Pre-Submission Inspector">
+  <meta property="og:description" content="Загрузите ZIP вашей игры и получите детальный отчёт о соответствии требованиям Яндекс Игр. Бесплатно, без установки, прямо в браузере.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23f5a623'/><text x='50' y='65' font-size='50' font-weight='bold' fill='%23000' text-anchor='middle'>YG</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="overrides.css">
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-badge">
+        <span class="logo-icon">⚡</span>
+        <div class="logo-text">
+          <h1>CheckYG</h1>
+          <span class="logo-sub">Yandex Games Pre-Submission Inspector</span>
+        </div>
+      </div>
+      <span class="version-tag">v2.0 · Browser Edition</span>
+    </div>
+    <div class="header-actions">
+      <a class="btn btn-github" href="https://github.com/YOUR_USERNAME/checkyg" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <button class="btn btn-secondary" id="btn-reset" style="display: none;">
+        🔄 Новый архив
+      </button>
+    </div>
+  </header>
+
+  <main class="app-container">
+
+    <!-- Upload Dropzone Section -->
+    <section class="upload-section" id="upload-section">
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="file-input" accept=".zip" class="file-input" />
+        <div class="dropzone-content">
+          <div class="dropzone-icon">📁</div>
+          <h2>Поместите ZIP-архив билда игры</h2>
+          <p class="dropzone-desc">Перетащите архив сюда или кликните для выбора файла с компьютера</p>
+          <div class="dropzone-tags">
+            <span class="tag">HTML5</span>
+            <span class="tag">Godot Web</span>
+            <span class="tag">Unity WebGL</span>
+            <span class="tag">Pixi / Phaser</span>
+            <span class="tag">Canvas</span>
+          </div>
+          <div class="dropzone-hint">
+            💡 Анализатор проверяет требования модерации Яндекс Игр: SDK, тайминги, звуки, рекламу, покупки, кириллицу в путях и UX.
+            <strong>Файл не покидает ваш браузер — анализ выполняется локально.</strong>
+          </div>
+        </div>
+        <div class="upload-loader" id="upload-loader" style="display: none;">
+          <div class="spinner"></div>
+          <h3 id="loader-title">Распаковка и анализ архива...</h3>
+          <p id="loader-desc">Индексация кода и проверка структуры</p>
+        </div>
+      </div>
+
+      <!-- Privacy Notice -->
+      <div class="privacy-banner">
+        🔒 <strong>Приватность:</strong> Ваш ZIP-архив анализируется прямо в браузере с помощью JSZip. Файл никуда не отправляется.
+      </div>
+    </section>
+
+    <!-- Report Dashboard (Initially Hidden) -->
+    <section class="dashboard-section" id="dashboard-section" style="display: none;">
+
+      <!-- Readiness Banner -->
+      <div class="verdict-banner" id="verdict-banner">
+        <div class="verdict-icon" id="verdict-icon">🛡️</div>
+        <div class="verdict-text">
+          <h2 id="verdict-title">Анализ завершен</h2>
+          <p id="verdict-desc">Сводка готовности проекта к модерации</p>
+        </div>
+        <div class="score-circle-wrap">
+          <div class="score-circle" id="score-circle">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="circle-fill" id="circle-fill" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="score-inner">
+              <span class="score-val" id="score-val">0%</span>
+              <span class="score-lbl">SCORE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Ribbon -->
+      <div class="metrics-ribbon">
+        <div class="metric-card metric-fail" id="card-fail">
+          <div class="metric-num" id="metric-fail-num">0</div>
+          <div class="metric-title">HARD FAILS</div>
+          <div class="metric-sub">Отказ модератора</div>
+        </div>
+        <div class="metric-card metric-warn" id="card-warn">
+          <div class="metric-num" id="metric-warn-num">0</div>
+          <div class="metric-title">WARNINGS</div>
+          <div class="metric-sub">Риски и эвристики</div>
+        </div>
+        <div class="metric-card metric-nv" id="card-nv">
+          <div class="metric-num" id="metric-nv-num">0</div>
+          <div class="metric-title">NOT VERIFIED</div>
+          <div class="metric-sub">Требует плейтеста</div>
+        </div>
+        <div class="metric-card metric-pass" id="card-pass">
+          <div class="metric-num" id="metric-pass-num">0</div>
+          <div class="metric-title">PASS</div>
+          <div class="metric-sub">Подтверждено</div>
+        </div>
+        <div class="metric-card metric-cov" id="card-cov">
+          <div class="metric-num" id="metric-cov-num">0%</div>
+          <div class="metric-title">COVERAGE</div>
+          <div class="metric-sub">Авто-покрытие</div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" data-tab="tab-checks">
+          <span class="tab-ico">📊</span> Аудит проверок (<span id="tab-checks-count">0</span>)
+        </button>
+        <button class="tab-btn" data-tab="tab-archive">
+          <span class="tab-ico">📦</span> Структура архива
+        </button>
+        <button class="tab-btn" data-tab="tab-manual">
+          <span class="tab-ico">📋</span> Чек-лист модерации
+        </button>
+        <button class="tab-btn" data-tab="tab-export">
+          <span class="tab-ico">📄</span> Экспорт отчета
+        </button>
+      </div>
+
+      <!-- Tab 1: Checks -->
+      <div class="tab-pane active" id="tab-checks">
+        <div class="pane-toolbar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="filter-search" placeholder="Поиск по проверкам, пунктам правил (например: 1.19, ready, audio)..." />
+          </div>
+          <div class="filter-pills">
+            <button class="pill-btn active" data-filter="all">Все</button>
+            <button class="pill-btn pill-fail" data-filter="fail">❌ Ошибки</button>
+            <button class="pill-btn pill-warn" data-filter="warn">⚠️ Предупреждения</button>
+            <button class="pill-btn pill-req" data-filter="req">Требования REQ</button>
+            <button class="pill-btn pill-rec" data-filter="rec">Советы REC</button>
+          </div>
+        </div>
+        <div class="categories-list" id="categories-list">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Tab 2: Archive Structure -->
+      <div class="tab-pane" id="tab-archive">
+        <div class="archive-grid">
+          <div class="archive-summary-card">
+            <h3>📊 Статистика архива</h3>
+            <div class="stat-row"><span>Всего файлов:</span><strong id="arch-file-count">0</strong></div>
+            <div class="stat-row"><span>Размер архива (ZIP):</span><strong id="arch-zip-size">0 MB</strong></div>
+            <div class="stat-row"><span>Лимит модерации:</span><span class="badge badge-req">До 100 МБ</span></div>
+            <div class="stat-row"><span>Корень index.html:</span><span id="arch-root-status" class="badge">Проверка...</span></div>
+            <div class="largest-files-block">
+              <h4>Топ самых тяжелых файлов</h4>
+              <div class="file-size-list" id="largest-files-list"></div>
+            </div>
+          </div>
+          <div class="archive-tree-card">
+            <h3>🌲 Дерево файлов сборки</h3>
+            <p class="desc">Красным подсвечиваются файлы с кириллицей или пробелами в именах (блокер модерации!)</p>
+            <div class="file-tree-container" id="file-tree-container"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Interactive Manual Checklist -->
+      <div class="tab-pane" id="tab-manual">
+        <div class="checklist-header">
+          <div>
+            <h3>Официальный ручной чек-лист перед отправкой на модерацию</h3>
+            <p>Даже если авто-проверки показали 100%, модераторы Яндекса проверяют эти пункты вручную.</p>
+          </div>
+          <div class="checklist-progress">
+            <span id="checklist-counter">0 / 12 пройдено</span>
+            <div class="checklist-bar"><div class="checklist-bar-fill" id="checklist-bar-fill"></div></div>
+          </div>
+        </div>
+        <div class="checklist-items" id="checklist-items"></div>
+      </div>
+
+      <!-- Tab 4: Export Report -->
+      <div class="tab-pane" id="tab-export">
+        <div class="export-card">
+          <div class="export-header">
+            <h3>Сводный отчет о готовности к модерации</h3>
+            <div class="export-actions">
+              <button class="btn btn-primary" id="btn-copy-report">📋 Скопировать Markdown</button>
+              <button class="btn btn-secondary" id="btn-download-report">💾 Скачать .md отчет</button>
+              <button class="btn btn-secondary" id="btn-print-report">🖨️ Печать / PDF</button>
+            </div>
+          </div>
+          <pre class="export-preview" id="export-preview"></pre>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <span>CheckYG · Неофициальный инспектор на базе open-source <a href="https://github.com/Nioris/yandex-games-debug-checker" target="_blank" rel="noopener">yandex-games-debug-checker</a></span>
+    <span class="footer-links">
+      <a href="https://yandex.ru/dev/games/doc/ru/concepts/requirements" target="_blank" rel="noopener">Официальные требования Яндекс Игр</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/YOUR_USERNAME/checkyg" target="_blank" rel="noopener">⭐ Star on GitHub</a>
+    </span>
+  </footer>
+
+  <!-- JSZip from CDN for in-browser ZIP extraction -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHveA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
