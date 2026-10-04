@@ -2,14 +2,14 @@
 
 **Бесплатный онлайн-инструмент для проверки готовности HTML5-игры к публикации в [Яндекс Играх](https://yandex.ru/games/).**
 
-[![GitHub Pages](https://img.shields.io/badge/demo-live-brightgreen?logo=github)](https://YOUR_USERNAME.github.io/checkyg)
+[![GitHub Pages](https://img.shields.io/badge/demo-live-brightgreen?logo=github)](https://lapserdaser.github.io/Check-Yandex-Games)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
 ## 🚀 Использование
 
-**Открыть онлайн:** **[YOUR_USERNAME.github.io/checkyg](https://YOUR_USERNAME.github.io/checkyg)**
+**Открыть онлайн:** **[lapserdaser.github.io/Check-Yandex-Games](https://lapserdaser.github.io/Check-Yandex-Games)**
 
 1. Упакуйте игру в ZIP-архив (с `index.html` в корне)
 2. Перетащите архив на страницу или нажмите для выбора файла
@@ -44,8 +44,8 @@
 Если хотите запустить с полным предпросмотром WebGL-игр:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/checkyg.git
-cd checkyg/server
+git clone https://github.com/lapserdaser/Check-Yandex-Games.git
+cd Check-Yandex-Games/server
 npm install
 npm start
 # Открыть: http://localhost:3000
