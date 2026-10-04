@@ -1,6 +1,8 @@
 /**
  * CheckYG Static Analysis Engine
- * Based on Nioris/yandex-games-debug-checker v1.1.0 ruleset + Yandex Games moderation requirements.
+ * Based on yandex-games-debug-checker v1.1.0 by 3/9 Games:
+ * Copyright (c) 2026 3/9 Games (MIT License)
+ * Copyright (c) 2026 CheckYG Contributors
  */
 const path = require('path');
 

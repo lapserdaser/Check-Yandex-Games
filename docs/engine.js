@@ -1,7 +1,10 @@
 /**
  * CheckYG Static Analysis Engine — Browser Edition
- * Ported from static-engine.js (Node.js) to native ES module for GitHub Pages.
- * Based on Nioris/yandex-games-debug-checker v1.1.0 ruleset + Yandex Games moderation requirements.
+ * Ported from static-engine.js to native ES module for GitHub Pages.
+ * 
+ * Based on yandex-games-debug-checker v1.1.0 by 3/9 Games:
+ * Copyright (c) 2026 3/9 Games (MIT License)
+ * Copyright (c) 2026 CheckYG Contributors
  *
  * No dependencies. Works entirely in the browser.
  */

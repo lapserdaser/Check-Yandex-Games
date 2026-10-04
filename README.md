@@ -71,13 +71,22 @@ checkyg/
 
 ---
 
-## ✅ Основан на
+## 👥 Авторы и благодарности
 
-- [Nioris/yandex-games-debug-checker](https://github.com/Nioris/yandex-games-debug-checker) — открытый набор правил проверки
-- [Официальные требования Яндекс Игр](https://yandex.ru/dev/games/doc/ru/concepts/requirements)
+* **Оригинальные правила и чекер:** [Nioris/yandex-games-debug-checker](https://github.com/Nioris/yandex-games-debug-checker) — **Copyright (c) 2026 3/9 Games**
+* **Веб-интерфейс и браузерная редакция:** **CheckYG Contributors / Denis ([@lapserdaser](https://github.com/lapserdaser))**
+* **Официальные спецификации:** [Требования Яндекс Игр к сборкам](https://yandex.ru/dev/games/doc/ru/concepts/requirements)
 
 ---
 
-## 📄 Лицензия
+## 📄 Лицензия и отказ от ответственности
 
-MIT © 2026
+Проект распространяется под условиями открытой лицензии **MIT**:
+
+```text
+Copyright (c) 2026 3/9 Games
+Copyright (c) 2026 CheckYG Contributors
+```
+
+### ⚠️ Ограничения и отказ от ответственности (AS IS):
+Программное обеспечение предоставляется **«КАК ЕСТЬ» (AS IS)**, без каких-либо явных или подразумеваемых гарантий. Оригинальные авторы (**3/9 Games**) и авторы CheckYG **не несут ответственности** за любые ошибки в проверках, сбои, прохождение либо непрохождение модерации в Яндекс Играх, потерю данных или финансовые убытки, возникшие в результате использования данного инструмента. Инструмент носит исключительно вспомогательный и рекомендательный характер.
