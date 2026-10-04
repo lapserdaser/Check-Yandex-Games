@@ -1,12 +1,12 @@
 /**
  * CheckYG Static Analysis Engine — Browser Edition
- * Ported from static-engine.js to native ES module for GitHub Pages.
  * 
- * Based on yandex-games-debug-checker v1.1.0 by 3/9 Games:
+ * Author of this Web Application: Denis (lapserdaser)
+ * Based on static analysis rules from yandex-games-debug-checker:
  * Copyright (c) 2026 3/9 Games (MIT License)
- * Copyright (c) 2026 CheckYG Contributors
  *
- * No dependencies. Works entirely in the browser.
+ * CheckYG Web is an independent derived work.
+ * 3/9 Games is not the author of this web tool and is not affiliated with it.
  */
 
 const HARD_FAIL_CHECKS = new Set([
